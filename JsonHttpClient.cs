@@ -150,7 +150,7 @@ namespace Salesforce.Common
             }
             catch (BaseHttpClientException e)
             {
-                throw ParseForceException(e.Message);
+                throw new Exception(e.Message);
             }
         }
 
