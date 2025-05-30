@@ -45,7 +45,7 @@ namespace Salesforce.Common
         private static Error ParseError(string error)
         {
             Error value;
-            return Enum.TryParse(error.Replace("_", ""), true, out value) ? value : Error.Unknown;
+            return Enum.TryParse(error?.Replace("_", ""), true, out value) ? value : Error.Unknown;
         }
     }
 }
