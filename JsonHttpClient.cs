@@ -26,7 +26,7 @@ namespace Salesforce.Common
         private static ForceException ParseForceException(string responseMessage)
         {
             var errorResponse = JsonConvert.DeserializeObject<ErrorResponses>(responseMessage);
-            return new ForceException(errorResponse[0].ErrorCode, errorResponse[0].Message);
+            return new ForceException(errorResponse[0]?.ErrorCode ?? "WE GOT ITCHUS", errorResponse[0]?.Message ?? responseMessage);
         }
 
         // GET
@@ -150,7 +150,7 @@ namespace Salesforce.Common
             }
             catch (BaseHttpClientException e)
             {
-                throw new Exception(e.Message);
+                throw ParseForceException(e.Message);
             }
         }
 
