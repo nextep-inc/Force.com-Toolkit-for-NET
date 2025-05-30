@@ -20,20 +20,17 @@ jobs:
         id: version
         run: echo "date=$(date +'%Y.%-m.%-d.%-H%M')" >> $GITHUB_OUTPUT
       - name: Build Project
-        working-directory: src
         run: |
           dotnet build \
             --configuration Release \
             /p:Version=${{steps.version.outputs.date}}
       - name: Package Project
-        working-directory: src
         run: |
           dotnet pack \
             --configuration Release \
             --no-build \
             /p:Version=${{steps.version.outputs.date}}
       - name: Publish Package
-        working-directory: src
         run: |
           dotnet nuget push \
             "bin/Release/*.${{steps.version.outputs.date}}.nupkg" \
